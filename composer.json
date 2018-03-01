@@ -1,0 +1,11 @@
+{
+    "name": "webapp/webapp-shell",
+    "description": "Git shell made with PHP",
+    "authors": [
+        {
+            "name": "May",
+            "email": "may+github@maymeow.click"
+        }
+    ],
+    "require": {}
+}
