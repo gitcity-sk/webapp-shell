@@ -7,5 +7,10 @@
             "email": "may+github@maymeow.click"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "Webapp\\Shell\\": "src/"
+        }
+    },
     "require": {}
 }
