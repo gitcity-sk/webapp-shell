@@ -27,8 +27,8 @@ require_once $baseDir . '/config/shell.php';
 /**
  * Initialize hook
  */
-$_SERVER['argv'][1] = 'refs/heads/master';
-$_SERVER['SSH_ORIGINAL_COMMAND'] = "git-receive-pack '~/martin-kukolos/testovaci-projekt.git'";
+// $_SERVER['argv'][1] = 'refs/heads/master';
+// $_SERVER['SSH_ORIGINAL_COMMAND'] = "git-receive-pack '~/martin-kukolos/testovaci-projekt.git'";
 
 $ref = new GitReference($_SERVER);
 $permission = new Permission();
