@@ -9,10 +9,10 @@ class Permission
 {
     protected $project;
 
-    public function isAllowedToPush(Project $project)
+    public function isAllowedToPush(Project $project, Key $key)
     {
         // If user is owner return true
-        if ($project->isOwner()) return true;
+        if ($project->get()->user_id == $key->getOwner()) return true;
 
         // Check if branches are protected
         if (in_array($project->getReference()->getRefs(), $project->getProtectedBranches())) {
