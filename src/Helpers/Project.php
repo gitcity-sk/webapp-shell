@@ -24,11 +24,11 @@ class Project
         $client = new \GuzzleHttp\Client(['base_uri' => SERVER_ADDRESS]);
 
         try {
-            $response = $client->get('/api/git/project', [
+            $response = $client->get('/api/git/update', [
                 'query' => [
                     'shell_secret_key' => SHELL_KEY,
                     'project' => $this->getProjectName(),
-                    'user' => $this->gitreference->getKeyId()
+                    'key_id' => $this->gitreference->getKeyId()
                     ]
             ]);
         } catch (\GuzzleHttp\Exception\ClientException $e) {
@@ -40,9 +40,12 @@ class Project
         $this->data = json_decode($response->getBody());
     }
 
+    /**
+     * Show project Data
+     */
     public function get()
     {
-        return $this->data;
+        return $this->data->data;
     }
 
     public function getReference()

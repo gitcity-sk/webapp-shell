@@ -27,9 +27,9 @@ require_once $baseDir . '/config/shell.php';
 /**
  * For testing
  */
- // $_SERVER['argv'][1] = 'refs/heads/master';
- // $_SERVER['SSH_ORIGINAL_COMMAND'] = "git-receive-pack '~/martin-kukolos/mikrotik-backups.git'";
- // $_SERVER['GC_ID'] = 2;
+//  $_SERVER['argv'][1] = 'refs/heads/master';
+//  $_SERVER['SSH_ORIGINAL_COMMAND'] = "git-receive-pack '~/may/hello-world-project.git'";
+//  $_SERVER['GC_ID'] = 2;
 
 $ref = new GitReference();
 
@@ -43,7 +43,8 @@ $project = new Project($ref);
 Console::print('Running Hook in ' . hook_file::hooks() . '/hooks');
 Console::print('Running Update Hook');
 Console::print('Project: ' . $project->get()->data->name);
-Console::print('Owner? ' . $project->isOwner());
+Console::print('Project owner: ' . $project->get()->user_id);
+Console::print('Key ID: ' . $ref->getKeyId());
 
 //Show Ref
 Console::print('Ref: '. $ref->getRefs());
