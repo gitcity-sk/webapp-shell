@@ -1,0 +1,5 @@
+<?php
+
+define ('SERVER_ADDRESS', 'http://localhost:8000/');
+
+define ('SHELL_KEY', 'faDvytvWmFjNJUzxUJhgZ9ntf7A3L695FzyQ2');

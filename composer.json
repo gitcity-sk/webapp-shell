@@ -12,5 +12,7 @@
             "Webapp\\Shell\\": "src/"
         }
     },
-    "require": {}
+    "require": {
+        "guzzlehttp/guzzle": "~6.0"
+    }
 }

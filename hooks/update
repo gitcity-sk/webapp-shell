@@ -2,6 +2,9 @@
 <?php
 
 use Webapp\Shell\Helpers\Console;
+use Webapp\Shell\GitReference;
+use Webapp\Shell\Helpers\Permission;
+use Webapp\Shell\Helpers\Project;
 
 /**
  * 
@@ -15,48 +18,34 @@ class hook_file
 }
 
 /**
- * 
- */
-class hook_ref
-{
-    protected $ref;
-
-    public function __construct($ref)
-    {
-        if (null !== $ref) $this->ref = $ref;
-    }
-
-    public function getRef()
-    {
-        return $this->ref;
-    }
-}
-
-/**
  * Main hook configure
  */
 $baseDir = hook_file::hooks();
 require_once $baseDir . '/vendor/autoload.php';
+require_once $baseDir . '/config/shell.php';
 
 /**
- * Main hook
+ * Initialize hook
  */
-$ref = new hook_ref($_SERVER['argv'][1]);
+$_SERVER['argv'][1] = 'refs/heads/master';
+$_SERVER['SSH_ORIGINAL_COMMAND'] = "git-receive-pack '~/martin-kukolos/testovaci-projekt.git'";
 
-Console::print('Running Update Hook');
+$ref = new GitReference($_SERVER);
+$permission = new Permission();
+$project = new Project($ref);
+
 Console::print('Running Hook in ' . hook_file::hooks() . '/hooks');
+Console::print('Running Update Hook');
+Console::print('Project: ' . $project->get()->data->name);
 
 //Show Ref
 Console::print('Ref: '. $ref->getRef());
 
-print_r($_SERVER);
+// Just for log
+//print_r($_SERVER);
 
-//print_r(file_get_contents('http://localhost:8000/api/projects/3/tags'));
+// check if user is allowed to push to branches
+$permission->isAllowedToPush($project);
 
-if ($ref->getRef() == "refs/heads/master") {
-    $branch = $ref->getRef();
-    Console::print("----> not allowed, $branch is protected branch but allowing to push");
-    //exit(1);
-}
-
+// Send information when hook is done
 Console::print('Hook Done');
