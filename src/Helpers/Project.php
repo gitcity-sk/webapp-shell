@@ -48,14 +48,14 @@ class Project
         return $this->data->data;
     }
 
-    public function getReference()
-    {
-        return $this->gitreference;
-    }
-
     public function getBody()
     {
         return $this->body;
+    }
+
+    public function getReference()
+    {
+        return $this->gitreference;
     }
 
     protected function getPath()
