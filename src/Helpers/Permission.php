@@ -11,10 +11,14 @@ class Permission
 
     public function isAllowedToPush(Project $project)
     {
-        if (in_array($project->getReference()->getRef(), $project->getProtectedBranches())) {
-            $branch = $project->getReference()->getRef();
+        // If user is owner return true
+        if ($project->isOwner()) return true;
+
+        // Check if branches are protected
+        if (in_array($project->getReference()->getRefs(), $project->getProtectedBranches())) {
+            $branch = $project->getReference()->getRefs();
             Console::print("not allowed, $branch is protected branch but allowing to push");
-            //exit(1);
+            exit(1);
         }
     }   
 }

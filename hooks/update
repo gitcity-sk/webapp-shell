@@ -25,21 +25,28 @@ require_once $baseDir . '/vendor/autoload.php';
 require_once $baseDir . '/config/shell.php';
 
 /**
- * Initialize hook
+ * For testing
  */
-// $_SERVER['argv'][1] = 'refs/heads/master';
-// $_SERVER['SSH_ORIGINAL_COMMAND'] = "git-receive-pack '~/martin-kukolos/testovaci-projekt.git'";
+ // $_SERVER['argv'][1] = 'refs/heads/master';
+ // $_SERVER['SSH_ORIGINAL_COMMAND'] = "git-receive-pack '~/martin-kukolos/mikrotik-backups.git'";
+ // $_SERVER['GC_ID'] = 2;
 
-$ref = new GitReference($_SERVER);
+$ref = new GitReference();
+
+$ref->setRefs($_SERVER['argv'][1])
+    ->setSshCommand($_SERVER['SSH_ORIGINAL_COMMAND'])
+    ->setKeyId($_SERVER['GC_ID']);
+
 $permission = new Permission();
 $project = new Project($ref);
 
 Console::print('Running Hook in ' . hook_file::hooks() . '/hooks');
 Console::print('Running Update Hook');
 Console::print('Project: ' . $project->get()->data->name);
+Console::print('Owner? ' . $project->isOwner());
 
 //Show Ref
-Console::print('Ref: '. $ref->getRef());
+Console::print('Ref: '. $ref->getRefs());
 
 // Just for log
 //print_r($_SERVER);

@@ -8,15 +8,9 @@ class GitReference
 
     protected $originalSSHCommand;
 
-    public function __construct($ref)
-    {
-        if (null !== $ref && is_array($ref)) {
-            $this->ref = $ref['argv'][1];
-            $this->originalSSHCommand = $ref['SSH_ORIGINAL_COMMAND'];
-        }
-    }
+    protected $keyId;
 
-    public function getRef()
+    public function getRefs()
     {
         return $this->ref;
     }
@@ -24,6 +18,32 @@ class GitReference
     public function getSshCommand()
     {
         return $this->originalSSHCommand;
+    }
+
+    public function getKeyId()
+    {
+        return $this->keyId;
+    }
+
+    public function setRefs($refs)
+    {
+        $this->ref = $refs;
+
+        return $this;
+    }
+
+    public function setSshCommand($sshCommand)
+    {
+        $this->originalSSHCommand = $sshCommand;
+
+        return $this;
+    }
+
+    public function setKeyId($keyId)
+    {
+        $this->keyId = $keyId;
+
+        return $this;
     }
 
 }

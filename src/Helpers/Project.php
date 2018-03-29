@@ -27,7 +27,8 @@ class Project
             $response = $client->get('/api/git/project', [
                 'query' => [
                     'shell_secret_key' => SHELL_KEY,
-                    'project' => $this->getProjectName()
+                    'project' => $this->getProjectName(),
+                    'user' => $this->gitreference->getKeyId()
                     ]
             ]);
         } catch (\GuzzleHttp\Exception\ClientException $e) {
@@ -71,5 +72,12 @@ class Project
     public function getProtectedBranches()
     {
         return $this->protectedBranches;
+    }
+
+    public function isOwner()
+    {
+        if ($this->data->data->user_id == $this->gitreference->getKeyId()) return true;
+
+        return false;
     }
 }
