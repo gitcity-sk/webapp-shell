@@ -28,9 +28,9 @@ require_once $baseDir . '/config/shell.php';
 /**
  * For testing
  */
-  $_SERVER['argv'][1] = 'refs/heads/master';
-  $_SERVER['SSH_ORIGINAL_COMMAND'] = "git-receive-pack '~/may/hello-world-project.git'";
-  $_SERVER['GC_ID'] = 1;
+//  $_SERVER['argv'][1] = 'refs/heads/master';
+//  $_SERVER['SSH_ORIGINAL_COMMAND'] = "git-receive-pack '~/may/hello-world-project.git'";
+//  $_SERVER['GC_ID'] = 1;
 
 $ref = new GitReference();
 

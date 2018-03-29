@@ -21,7 +21,7 @@ class Key
                 'query' => [
                     'shell_secret_key' => SHELL_KEY,
                     'key_id' => $this->gitreference->getKeyId()
-                    ]
+                ]
             ]);
         } catch (\GuzzleHttp\Exception\ClientException $e) {
             Console::print('Something went wrong');
