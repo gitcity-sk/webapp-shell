@@ -56,7 +56,7 @@ Console::print('Ref: '. $ref->getRefs());
 //print_r($_SERVER);
 
 // check if user is allowed to push to branches
-$permission->isAllowedToPush($project);
+$permission->isAllowedToPush($project, $key);
 
 // Send information when hook is done
 Console::print('Hook Done');
