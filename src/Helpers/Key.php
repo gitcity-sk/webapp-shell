@@ -2,15 +2,26 @@
 
 namespace Webapp\Shell\Helpers;
 
+use Psr\Http\Message\StreamInterface;
 use Webapp\Shell\GitReference;
 
 class Key
 {
 
+    /**
+     * @var \Psr\Http\Message\StreamInterface
+     */
     protected $body;
 
+    /**
+     * @var mixed
+     */
     protected $data;
 
+    /**
+     * Key constructor.
+     * @param GitReference $gitReference
+     */
     public function __construct(GitReference $gitReference)
     {
         $this->gitreference = $gitReference;
@@ -32,7 +43,10 @@ class Key
         $this->data = json_decode($response->getBody());
     }
 
-    public function getBody()
+    /**
+     * @return \Psr\Http\Message\StreamInterface
+     */
+    public function getBody() : StreamInterface
     {
         return $this->body;
     }
@@ -45,6 +59,9 @@ class Key
         return $this->data->data;
     }
 
+    /**
+     * @return mixed
+     */
     public function getOwner()
     {
         return $this->get()->user_id;

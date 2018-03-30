@@ -7,9 +7,17 @@ use Webapp\Shell\GitReference;
 
 class Permission
 {
+    /**
+     * @var
+     */
     protected $project;
 
-    public function isAllowedToPush(Project $project, Key $key)
+    /**
+     * @param Project $project
+     * @param Key $key
+     * @return bool
+     */
+    public function isAllowedToPush(Project $project, Key $key) : bool
     {
         // If user is owner return true
         if ($project->get()->user_id == $key->getOwner()) return true;
